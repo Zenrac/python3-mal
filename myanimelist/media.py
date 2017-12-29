@@ -273,9 +273,9 @@ class Media(Base, metaclass=abc.ABCMeta):
             try:
                 rank_tag = rank_tag_results[0].getparent().xpath(".//text()[contains(.,'#')]")[0]
                 media_info['rank'] = int(rank_tag.strip()[1:].replace(',', ''))
-            except:
+            except: # Can't find a rank
                 media_info['rank'] = "N/A"
-        except:
+        except IndexError:
             if not self.session.suppress_parse_exceptions:
                 raise
 
